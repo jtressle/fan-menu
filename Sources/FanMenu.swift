@@ -126,16 +126,24 @@ class FanMenuScene {
         )
         
         buttonNode = [menuCircle].group()
-        if let uiImage = UIImage(named: button.image) {
-            menuIcon = Image(
-                src: button.image,
-                place: Transform.move(
-                    dx: -Double(uiImage.size.width) / 2,
-                    dy: -Double(uiImage.size.height) / 2
+        
+        if (!button.image.isEmpty)
+        {
+            if let uiImage = UIImage(named: button.image) {
+                menuIcon = Image(
+                    src: button.image,
+                    place: Transform.move(
+                        dx: -Double(uiImage.size.width) / 2,
+                        dy: -Double(uiImage.size.height) / 2
+                    )
                 )
-            )
-            buttonNode.contents.append(menuIcon!)
-        } else {
+                buttonNode.contents.append(menuIcon!)
+            } else {
+                menuIcon = .none
+            }
+        }
+        else
+        {
             menuIcon = .none
         }
         
@@ -234,16 +242,21 @@ class FanMenuScene {
                 fill: button.color
             )
         ]
-        if let uiImage = UIImage(named: button.image) {
-            let image = Image(
-                src: button.image,
-                place: Transform.move(
-                    dx: -Double(uiImage.size.width) / 2,
-                    dy: -Double(uiImage.size.height) / 2
+        
+        if (!button.image.isEmpty)
+        {
+            if let uiImage = UIImage(named: button.image) {
+                let image = Image(
+                    src: button.image,
+                    place: Transform.move(
+                        dx: -Double(uiImage.size.width) / 2,
+                        dy: -Double(uiImage.size.height) / 2
+                    )
                 )
-            )
-            contents.append(image)
+                contents.append(image)
+            }
         }
+        
         let node = Group(contents: contents)
         node.opacity = 0.0
         
